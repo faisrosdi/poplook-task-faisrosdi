@@ -33,11 +33,21 @@
             </nav>
             <div class="row justify-content-center mt-4">
                 <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12">
-                    <div class="row">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Product List</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Product Info</li>
+                        </ol>
+                    </nav>
+                    
+                    <div class="row mt-2">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 bg-danger">
-                                    asdsa
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <img src="{{ $response['data']['image_url_lg'][0]}}" class="w-100">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <img src="{{ $response['data']['image_url_lg'][1]}}" class="w-100">
                                 </div>
                             </div>
                         </div>
@@ -46,6 +56,9 @@
                             <p>RM {{ number_format((float)$response['data']['price'], 2, '.', '') }}</p>
                             <span>Details:</span>
                             {!!$response['data']['description']!!}
+
+                            <button class="btn btn-dark">Add To Card</button>
+                            <span>{{ $response['data']['quantity']}} pieces available</span>
                         </div>
                     </div>
                 </div>

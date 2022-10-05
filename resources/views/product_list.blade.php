@@ -24,6 +24,10 @@
             a:hover {
                 color: #333;
             }
+
+            .card:hover {
+                background: url("images/card-front.jpg") no-repeat;
+            }
         </style>
     </head>
     <body class="p-0 m-0">
@@ -33,6 +37,11 @@
             </nav>
             <div class="row justify-content-center mt-4">
                 <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Home</li>
+                        </ol>
+                    </nav>
                     <div class="row">
                         @foreach($response['data'] as $response)
                         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 d-flex align-items-stretch">
@@ -43,9 +52,6 @@
                                         <h5 class="card-title">{{$response['name']}}</h5>
                                         <p class="card-text">RM {{ number_format((float)$response['newprice'], 2, '.', '') }}</p>
                                     </div>
-                                    {{-- <div class="card-footer bg-white border-top-0">
-                                        <a href="{{ url('product_info/'. $response['id_product']) }}" class="btn btn-dark d-block">Go somewhere</a>
-                                    </div> --}}
                                 </div>
                             </a>
                             
