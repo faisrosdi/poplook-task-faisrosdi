@@ -10,7 +10,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -24,10 +23,6 @@
             a:hover {
                 color: #333;
             }
-
-            .card:hover {
-                background: url("images/card-front.jpg") no-repeat;
-            }
         </style>
     </head>
     <body class="p-0 m-0">
@@ -39,7 +34,7 @@
                 <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Home</li>
+                            <li class="breadcrumb-item active" aria-current="page">Product List</li>
                         </ol>
                     </nav>
                     <div class="row">
@@ -47,7 +42,7 @@
                         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 d-flex align-items-stretch">
                             <a href="{{ url('product_info/'. $response['id_product']) }}">
                                 <div class="card w-100 my-3 border-0 ">
-                                    <img class="card-img-top" src="{{$response['image_url'][0]}}" alt="Card image cap">
+                                    <img class="card-img-top" src="{{$response['image_url'][0]}}">
                                     <div class="card-body bg-transparent">
                                         <h5 class="card-title">{{$response['name']}}</h5>
                                         <p class="card-text">RM {{ number_format((float)$response['newprice'], 2, '.', '') }}</p>

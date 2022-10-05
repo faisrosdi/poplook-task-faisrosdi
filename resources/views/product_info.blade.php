@@ -24,6 +24,76 @@
             a:hover {
                 color: #333;
             }
+
+            * {
+                box-sizing: border-box
+            }
+
+            .mySlides {
+                display: none
+            }
+
+            img {
+                vertical-align: middle;
+            }
+
+            /* Slideshow container */
+            .slideshow-container {
+                max-width: 1000px;
+                position: relative;
+                margin: auto;
+            }
+
+            /* Caption text */
+            .text {
+                color: #f2f2f2;
+                font-size: 15px;
+                padding: 8px 12px;
+                position: absolute;
+                bottom: 8px;
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Number text (1/3 etc) */
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+            }
+
+            /* The dots/bullets/indicators */
+            .dot {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+
+            span.active {
+                background-color: #717171;
+            }
+
+            /* Fading animation */
+            .fade {
+                animation-name: fade;
+                animation-duration: 1.5s;
+            }
+
+            @keyframes fade {
+                from {opacity: .4} 
+                to {opacity: 1}
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+                .text {font-size: 11px}
+            }
         </style>
     </head>
     <body class="p-0 m-0">
@@ -41,17 +111,23 @@
                     </nav>
                     
                     <div class="row mt-2">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <img src="{{ $response['data']['image_url_lg'][0]}}" class="w-100">
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <img src="{{ $response['data']['image_url_lg'][1]}}" class="w-100">
-                                </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="slideshow-container">
+                                @foreach($response['data']['image_url_lg'] as $item)
+                                    <div class="mySlides fade">
+                                        <img src="{{ $item }}" class="mx-auto d-block" style="width:80%;">
+                                    </div>
+                                @endforeach
+                            </div><br>
+                            
+                            <!-- The dots/circles -->
+                            <div style="text-align:center">
+                                @foreach($response['data']['image_url_lg'] as $item)
+                                    <span class="dot"></span> 
+                                @endforeach
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12">
                             <h5 class="fw-bold">{{ $response['data']['name']}}</h5>
                             <p>RM {{ number_format((float)$response['data']['price'], 2, '.', '') }}</p>
                             <span>Details:</span>
@@ -67,5 +143,26 @@
         
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <script>
+            let slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+            setTimeout(showSlides, 800); // Change image every 2 seconds
+            }
+        </script>
     </body>
 </html>
